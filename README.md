@@ -29,4 +29,8 @@ With default configuration, you can launch a Python program locally in debug mod
 
 ![debug_mode](images/debug_mode.png)
 
+The debug toolbar will also show up for you to perform debug actions.
+
+![debug_toolbar](images/debug_toolbar)
+
 For other kinds of breakpoints(such as conditional breakpoint, function breakpoint...), checkout [here](https://code.visualstudio.com/docs/editor/debugging#_advanced-breakpoint-topics).
