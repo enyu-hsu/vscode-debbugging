@@ -116,7 +116,7 @@ Below are the steps to remote debug using VS Code:
             "pathMappings": [
                 {
                     "localRoot": "${workspaceFolder}",  // You may also manually specify the directory containing your source code.
-                    "remoteRoot": "~/hello" // Linux example; adjust as necessary for your OS and situation.
+                    "remoteRoot": "."       // Linux example; adjust as necessary for your OS and situation.
                 }
             ],
             "port": 3000,                   // Set to the remote port.
