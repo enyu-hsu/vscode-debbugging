@@ -110,4 +110,4 @@ Below are the steps to remote debug using VS Code:
             "host": "1.2.3.4"               // Set to your remote host's public IP address.
         }
         ```
-    3. Set some breakpoints locally and start debugging using the remote debug configuration. Now you should be stopped on the locally set breakpoints, and are able to step into codes, examine varialbes, and all other debugging actions. Expressions that you enter in the **Debug Console** are run on the remote computer as well.
+    3. Set some breakpoints locally and start debugging using the remote debug configuration. Now you should be stopped on the locally set breakpoints, and are able to step into codes, examine varialbes, and perform all other debugging actions. Expressions that you enter in the **Debug Console** are run on the remote computer as well.
