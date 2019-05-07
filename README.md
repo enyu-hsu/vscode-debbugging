@@ -35,4 +35,7 @@ The debug toolbar will also show up for you to perform debug actions.
 
 ![debug_toolbar](images/debug_toolbar.png)
 
+### Debug Actions
+
+
 For other kinds of breakpoints(such as conditional breakpoint, function breakpoint...), checkout [here](https://code.visualstudio.com/docs/editor/debugging#_advanced-breakpoint-topics).
