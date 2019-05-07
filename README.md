@@ -4,7 +4,7 @@ This is a guide to help you setup the VS Code debugging environment for Python l
 ## Install VS Code
 You can download VS Code [here](https://code.visualstudio.com/).
 
-## Setup Debugging Configuration for Python
+## Setup debugging configuration for Python
 Click on the debug icon in the sidebar.
 
 ![](images/debug_icon.png)
@@ -26,7 +26,7 @@ In VS Code, there are two ways to perform debugging actions, **Launch** and **At
 
 You may choose the way you prefer by setting the `"request"` argument to `"launch"` or `"attach"` in `launch.json`.
 
-## Launching a Program in Debug Mode
+## Launching a program in debug mode
 With default configuration, you can launch a Python program locally in debug mode. Simply press `F5` to enter debug mode. The status bar below will turn orange and show the active launch configuration once you successfully enter debug mode.
 
 ![](images/debug_mode.png)
@@ -46,7 +46,7 @@ You can have more control of the breakpoints in Debug view's **BREAKPOINTS** sec
 
 For advanced breakpoints such as conditional breakpoints, inline breakpoints or function breakpoints, checkout [VS Code document](https://code.visualstudio.com/docs/editor/debugging#_advanced-breakpoint-topics).
 
-### Data Inspection
+### Data inspection
 Variables can be inspected in the **VARIABLES** section, and variables can be modified with the **Set Value** action by right clicking on the variables. Note that the variable values are relative to the selected stack frame in the **CALL STACK** section.
 
 ![](images/variables.png)
@@ -54,3 +54,28 @@ Variables can be inspected in the **VARIABLES** section, and variables can be mo
 You can also add variables or **expressions** to the **WATCH** section.
 
 ![](images/watch.png)
+
+## Remote debugging
+VS Code's remote debugging feature allows you to step through codes on a remote computer, and it's not nessesarily to install VS Code on the remote computer.
+
+Before we start, make sure the following requirements are satisfied.
+* For both computers
+  * Contains **identical** source code
+  * Install `ptvsd` using one of the command below
+    ```
+    conda install -c conda-forge ptvsd
+    conda install -c conda-forge/label/gcc7 ptvsd
+    python -m pip install --upgrade ptvsd
+    ```
+* For remote computer
+  * In the source code, add the following codes. Change `'1.2.3.4'` to your remote computer's private IP address if available (if you use a public address, you may see a "Cannot assign requested address" error), and specify the port number you would like to use.
+  ```python
+  import ptvsd
+
+  # Allow other computers to attach to ptvsd at this IP address and port.
+  ptvsd.enable_attach(address=('1.2.3.4', 3000), redirect_output=True)
+
+  # Pause the program until a remote debugger is attached
+  ptvsd.wait_for_attach()
+  ```
+  
