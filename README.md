@@ -55,8 +55,8 @@ You can also add variables or **expressions** to the **WATCH** section.
 
 ![](images/watch.png)
 
-## Remote debugging
-VS Code's remote debugging feature allows you to step through codes on a remote computer, and it's not nessesarily to install VS Code on the remote computer.
+## Remote debugging over ssh
+VS Code's remote debugging feature allows you to step through codes on a remote computer, and it's not nessesarily to install VS Code on the remote computer. In order to make secure connections while debugging, we use **SSH tunnel** and **port forwarding** here.
 
 Below are the steps to remote debug using VS Code:
 1. For both computers
@@ -68,33 +68,46 @@ Below are the steps to remote debug using VS Code:
         python -m pip install --upgrade ptvsd
         ```
 2. Remote computer
-    1. In the source code, add the following codes. Change `'1.2.3.4'` to your remote computer's private IP address if available (if you use a public address, you may see a "Cannot assign requested address" error), and specify the port number you would like to use.
+    1. Enable port forwarding by opening the `sshd_config` config file (found under `/etc/ssh/` on Linux and under `%programfiles(x86)%/openssh/etc` on Windows) and adding or modifying the following setting:
+        ```
+        AllowTcpForwarding yes
+        ```
+    2. Restart the SSH server. On Linux/macOS, run `sudo service ssh restart`. On Windows, run `services.msc`, locate and select OpenSSH or `sshd` in the list of services, and select **Restart**.
+    3. In the source code, add the following codes. The IP address is set to `localhost` since we connect through **SSH tunnel** and `3000` is the port number you would like to use.
         ```python
         import ptvsd
 
         # Allow other computers to attach to ptvsd at this IP address and port.
-        ptvsd.enable_attach(address=('1.2.3.4', 3000), redirect_output=True)
+        ptvsd.enable_attach(address=('localhost', 3000), redirect_output=True)
 
         # Pause the program until a remote debugger is attached
         ptvsd.wait_for_attach()
         ```
-    2. Launch the remote process through ptvsd
+    4. Launch the remote process through ptvsd
         ```
-        python -m ptvsd --host 1.2.3.4 --port 3000 --wait debug.py
+        python -m ptvsd --host localhost --port 3000 --wait debug.py
         ```
-        This starts the script `debug.py` using `python`, with the remote computer's private IP address `1.2.3.4` listening on port `3000`. The program will be paused until the debugger attaches.
+        This starts the script `debug.py` using `python`, with the remote computer as the host and listening on port `3000`. The program will be paused until the debugger attaches.
 3. Local computer
-    1. Add the commented lines of the codes that were added to the remote computer. Adding these lines ensures that the code on both computers matches line by line.
+    1. Create an SSH tunnel by running:
+        ```
+        ssh -L sourceport:localhost:destinationport user@remoteaddress
+        ```
+        using a selected port for `destinationport` and the appropriate username and the remote computer's IP address in `user@remoteaddress`. For example, to use port `3000` on IP address `1.2.3.4`, the command would be:
+        ```
+        ssh -L 3000:localhost:3000 user@1.2.3.4
+        ```
+    2. Add the commented lines of the codes that were added to the remote computer. Adding these lines ensures that the code on both computers matches line by line.
         ```python
         #import ptvsd
 
         # Allow other computers to attach to ptvsd at this IP address and port.
-        #ptvsd.enable_attach(address=('1.2.3.4', 3000), redirect_output=True)
+        #ptvsd.enable_attach(address=('localhost', 3000), redirect_output=True)
 
         # Pause the program until a remote debugger is attached
         #ptvsd.wait_for_attach()
         ```
-    2. Open `launch.json` and add the following configuration to the array in `"configuration"`. Modify `"remoteRoot"` to the directory on the remote computer containg the source code, and modify `"port"` and `"host"` to match the ones in `ptvsd.enable_attach` added to the source code.
+    3. Open `launch.json` and add the following configuration to the array in `"configuration"`. Modify `"remoteRoot"` to the directory on the remote computer containg the source code, and modify `"port"` and `"host"` to match the ones in `ptvsd.enable_attach` added to the source code.
         ```javascript
         {
             "name": "Python Attach (Remote Debug)",
@@ -107,7 +120,7 @@ Below are the steps to remote debug using VS Code:
                 }
             ],
             "port": 3000,                   // Set to the remote port.
-            "host": "1.2.3.4"               // Set to your remote host's public IP address.
+            "host": "localhost"             // Set to your remote host's public IP address.
         }
         ```
-    3. Set some breakpoints locally and start debugging using the remote debug configuration. Now you should be stopped on the locally set breakpoints, and are able to step into codes, examine varialbes, and perform all other debugging actions. Expressions that you enter in the **Debug Console** are run on the remote computer as well.
+    4. Set some breakpoints locally and start debugging using the remote debug configuration. Now you should be stopped on the locally set breakpoints, and are able to step into codes, examine varialbes, and perform all other debugging actions. Expressions that you enter in the **Debug Console** are run on the remote computer as well.
