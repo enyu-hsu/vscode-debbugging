@@ -27,6 +27,6 @@ You may choose the way you prefer by setting the `"request"` argument to `"launc
 ## Launching a Program in Debug Mode
 With default configuration, you can launch a Python program locally in debug mode. Simply press `F5` to enter debug mode. The status bar below will turn orange and show the active launch configuration once you successfully enter debug mode.
 
-![debug_mode](images.debug_mode.png)
+![debug_mode](images/debug_mode.png)
 
 For other kinds of breakpoints(such as conditional breakpoint, function breakpoint...), checkout [here](https://code.visualstudio.com/docs/editor/debugging#_advanced-breakpoint-topics).
