@@ -40,11 +40,17 @@ Breakpoints could be set by clicking on the **editor margin** or pressing `F9` o
 
 ![](images/breakpoint.png)
 
-You can have more control of the breakpoints in Debug view's **breakpoint section**.
+You can have more control of the breakpoints in Debug view's **BREAKPOINTS** section.
 
 ![](images/breakpoint_section.png)
 
 For advanced breakpoints such as conditional breakpoints, inline breakpoints or function breakpoints, checkout [VS Code document](https://code.visualstudio.com/docs/editor/debugging#_advanced-breakpoint-topics).
 
 #### Data Inspection
+Variables can be inspected in the **VARIABLES** section, and variables can be modified with the **Set Value** action by right clicking on the variables. Note that the variable values are relative to the selected stack frame in the **CALL STACK** section.
 
+![](images/variables.png)
+
+You can also add variables or **expressions** to the **WATCH** section.
+
+![](images/watch.png)
