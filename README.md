@@ -58,17 +58,17 @@ You can also add variables or **expressions** to the **WATCH** section.
 ## Remote debugging
 VS Code's remote debugging feature allows you to step through codes on a remote computer, and it's not nessesarily to install VS Code on the remote computer.
 
-Before we start, make sure the following requirements are satisfied.
-* For both computers
-  * Contains **identical** source code
-  * Install `ptvsd` using one of the command below
+Below are the steps to remote debug using VS Code:
+- For both computers
+  1. Contains **identical** source code
+  2. Install `ptvsd` using one of the command below
     ```
     conda install -c conda-forge ptvsd
     conda install -c conda-forge/label/gcc7 ptvsd
     python -m pip install --upgrade ptvsd
     ```
-* For remote computer
-  * In the source code, add the following codes. Change `'1.2.3.4'` to your remote computer's private IP address if available (if you use a public address, you may see a "Cannot assign requested address" error), and specify the port number you would like to use.
+- Remote computer
+  1. In the source code, add the following codes. Change `'1.2.3.4'` to your remote computer's private IP address if available (if you use a public address, you may see a "Cannot assign requested address" error), and specify the port number you would like to use.
   ```python
   import ptvsd
 
@@ -78,4 +78,19 @@ Before we start, make sure the following requirements are satisfied.
   # Pause the program until a remote debugger is attached
   ptvsd.wait_for_attach()
   ```
-  
+  2. Launch the remote process through ptvsd
+  ```bash
+  python -m ptvsd --host 1.2.3.4 --port 3000 --wait debug.py
+  ```
+  This starts the script `debug.py` using `python`, with the remote computer's private IP address `1.2.3.4` listening on port `3000`. The program will be paused until the debugger attaches.
+- Local computer
+  1. Add the commented lines of the codes that were added to the remote computer. Adding these lines ensures that the code on both computers matches line by line.
+  ```python
+  #import ptvsd
+
+  # Allow other computers to attach to ptvsd at this IP address and port.
+  #ptvsd.enable_attach(address=('1.2.3.4', 3000), redirect_output=True)
+
+  # Pause the program until a remote debugger is attached
+  #ptvsd.wait_for_attach()
+  ```
