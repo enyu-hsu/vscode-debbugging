@@ -35,7 +35,7 @@ The debug toolbar will also show up for you to perform debug actions.
 
 ![](images/debug_toolbar.png)
 
-#### Breakpoints
+### Breakpoints
 Breakpoints could be set by clicking on the **editor margin** or pressing `F9` on the current line. You may also call `breakpoint()` at any place in your Python code to pause the debugger.
 
 ![](images/breakpoint.png)
@@ -46,7 +46,7 @@ You can have more control of the breakpoints in Debug view's **BREAKPOINTS** sec
 
 For advanced breakpoints such as conditional breakpoints, inline breakpoints or function breakpoints, checkout [VS Code document](https://code.visualstudio.com/docs/editor/debugging#_advanced-breakpoint-topics).
 
-#### Data Inspection
+### Data Inspection
 Variables can be inspected in the **VARIABLES** section, and variables can be modified with the **Set Value** action by right clicking on the variables. Note that the variable values are relative to the selected stack frame in the **CALL STACK** section.
 
 ![](images/variables.png)
