@@ -9,15 +9,17 @@ Click on the debug icon in the sidebar.
 
 ![debug_icon](images/debug_icon.png)
 
-If you don't have any configuration yet, you will see "No Configurations". Click on the setting icon on the right to create one.
+If you don't have any configuration yet, you will see "No Configurations". Click on the setting icon to create one.
 
 ![no_configuration](images/no_configuration.png)
 
-A configuration menu will show up, choose **Python File**.
+A configuration menu will then show up, choose **Python File**.
 
 ![python_configuration](images/python_configuration.png)
 
 This will create and open a `launch.json` file with default configuration located in a `.vscode` folder in your workspace (project root folder). You can modify or add custom configurations here. For more configuration options, checkout the [official document](https://code.visualstudio.com/docs/python/debugging#_set-configuration-options).
+
+![launch_json](images/launch_json.png)
 
 ## Launch versus Attach configuration
 In VS Code, there are two ways to perform debugging actions, **Launch** and **Attach**. You may think of **launching** is to start your program in debug mode, and **attaching** is to attach the VS Code debugger to an **already** running process.
