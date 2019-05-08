@@ -126,7 +126,7 @@ Below are the steps to remote debug using VS Code:
     4. Set some breakpoints **locally** and start debugging using the remote debug configuration. Now you should be stopped on the locally set breakpoints, and are able to step into codes, examine varialbes, and perform all other debugging actions. Expressions that you enter in the **Debug Console** are run on the remote computer as well.
 
 ## Known issues with multiprocessing
-Unfortunately, VS Code debugger does not support `fork` at this moment, hence you may encounter some errors using functions from `multiprocessing`. A possible workaround for Python3 is to use `spawn` instead of `fork` by adding the following lines before using anything from `multiprocessing`. Also add `"subProcess: true"` to your `launch.json"`. (for more information, checkout [#943](https://github.com/microsoft/ptvsd/issues/943))
+Unfortunately, VS Code debugger does not support `fork` at this moment, hence you may encounter some errors using functions from `multiprocessing`. A possible workaround for Python3 is to use `spawn` instead of `fork` by adding the following lines before using anything from `multiprocessing`. Also add `"subProcess": true` to your `launch.json`. (for more information, checkout [#943](https://github.com/microsoft/ptvsd/issues/943))
 ```python
 import multiprocessing
 multiprocessing.set_start_method('spawn', force=True)
