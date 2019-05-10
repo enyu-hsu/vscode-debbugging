@@ -132,3 +132,16 @@ import multiprocessing
 multiprocessing.set_start_method('spawn', force=True)
 ```
 Note that using `spawn` may consume more memory and may thus cause problems so beware! (for more detailed explanation please refer to [#943](https://github.com/microsoft/ptvsd/issues/943#issuecomment-481148979) as well)
+
+## Debugging Practices with DSB2018 tran.py and valid.py
+As previously described, VS Code debugger does not support `fork` in the meanwhile, hence the `multiprocessing.Manager()` and `DataLoader` from `torch.utils.data` will cause erros when debugging. I've tried changing the `fork` method to `spawn` by adding
+```python
+multiprocessing.set_start_method('spawn', force=True)
+``` 
+before using any `multiprocessing` components, but unfortunately that does not work for me. So one possible workaround is to disable multiprocessing when debugging, and make sure that everything else is working fine, then we can add them back when running.
+
+So, you will need to disable the use of `Manager()` and set `cache` to `None`, since we're not using multiple workers while debugging, there's no need for the IPC manager.
+
+Also, to disable `forking` in `DataLoader`, set `n_worker = 0` in `config.ini`, which will make `DataLoader` to load data in the main process.
+
+After the above steps, we should be good to go, however, an error `"failed to launch debugger for child process"` will still occur which is caused by `train_test_split` from `sklearn.model_selection` because it uses `multiprocessing` as well. But that seems to not cause any issue, we can still train the model and the train/valid dataset is splitted as well.
