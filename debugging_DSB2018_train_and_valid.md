@@ -4,8 +4,8 @@ As we described in README.md, VS Code debugger does not support `fork` in the me
 ```python
 multiprocessing.set_start_method('spawn', force=True)
 ``` 
-before using any `multiprocessing` components, but unfortunately that does not work for me. So one possible workarond is to disable multiprocessing when debugging, and make sure that everything else is working fine, then we can add them back when running.
+before using any `multiprocessing` components, but unfortunately that does not work for me. So one possible workaround is to disable multiprocessing when debugging, and make sure that everything else is working fine, then we can add them back when running.
 
 So, you will need to disable the use of `Manager()` and set `cache` to `None`, since we're not using multiple workers while debugging, there's no need for the IPC manager.
 
-Also, to disable `fork` in `DataLoader`, set `n_worker = 0` in `config.ini`.
+Also, to disable `forking` in `DataLoader`, set `n_worker = 0` in `config.ini`, which will make `DataLoader` to load data in the main process.
