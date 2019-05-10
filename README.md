@@ -58,7 +58,7 @@ You can also add variables or **expressions** to the **WATCH** section.
 ## Remote debugging over ssh
 VS Code's remote debugging feature allows you to step through codes on a remote computer, and it's not nessesarily to install VS Code on the remote computer. In order to make secure connections while debugging, we use **SSH tunnel** and **port forwarding** here.
 
-Below are the steps to remote debug using VS Code:
+Below are the steps to remotely debug using VS Code:
 1. For both computers
     1. Contains **identical** source code
     2. Install `ptvsd` using one of the command below
