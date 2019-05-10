@@ -9,3 +9,5 @@ before using any `multiprocessing` components, but unfortunately that does not w
 So, you will need to disable the use of `Manager()` and set `cache` to `None`, since we're not using multiple workers while debugging, there's no need for the IPC manager.
 
 Also, to disable `forking` in `DataLoader`, set `n_worker = 0` in `config.ini`, which will make `DataLoader` to load data in the main process.
+
+After the above steps, we should be good to go, however, an error `"failed to launch debugger for child process"` will still occur which is caused by `train_test_split` from `sklearn.model_selection` because it uses `multiprocessing` as well. But that seems to not cause any issue, we can still train the model and the train/valid dataset is splitted as well.
