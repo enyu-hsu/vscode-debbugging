@@ -159,12 +159,12 @@ with SummaryWriter(log_dir) as writer:
 ### Visualizing graphs
 We could visualize our model graph to check if there's any miswiring by adding the following lines:
 ```python
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 dummy_input = torch.rand(n_batch, 3, width, width, device=device)
-torch.onnx.export(model, dummy_input, "checkpoint/model.pb", verbose=False)
-writer.add_onnx_graph("checkpoint/model.pb")
+writer.add_graph(model, dummy_input)
 ```
 You can checkout your graph in TensorBoard, which will look like this:
 ![](images/UNet.png)
 
-You can click on blocks to expend them and learn more details
+You can click on blocks or nodes to expend them and learn more details
 ![](images/graph_details.png)
