@@ -143,11 +143,11 @@ Also, to disable `forking` in `DataLoader`, set `n_worker = 0` in `config.ini`, 
 After the above steps, we should be good to go, however, an error `"failed to launch debugger for child process"` will still occur which is caused by `train_test_split` from `sklearn.model_selection` because it uses `multiprocessing` as well. But that seems to not cause any issue, we can still train the model and the train/valid dataset is splitted as well.
 
 ## Debugging with PyTorch
-We use TensorBoard to track our training metrics and visualize graphs, and we have to install tensorboardX for PyTorch to work with TensorBoard.
+We use TensorBoard to track our training metrics and visualize graphs, and we need `tensorboardX` for PyTorch to work with TensorBoard.
 ```
 pip install tensorflow tensorboard tensorboardX
 ```
-Start your Python script and use tensorbaord with `tensorboard --logdir <logging_directory>`. A url address will show up in the console, you may use `ssh tunnel` and `port forwarding` for remote access.
+Start your Python script and use TensorBaord with `tensorboard --logdir <logging_directory>`. A url address to TensorBoard will show up in the console, and you may use `ssh tunnel` and `port forwarding` for remote access.
 
 Start logging things to tensorboard by:
 ```python
@@ -163,3 +163,8 @@ dummy_input = torch.rand(n_batch, 3, width, width, device=device)
 torch.onnx.export(model, dummy_input, "checkpoint/model.pb", verbose=False)
 writer.add_onnx_graph("checkpoint/model.pb")
 ```
+You can checkout your graph in TensorBoard, which will look like this:
+![](images/UNet.png)
+
+You can click on blocks to expend them and learn more details
+![](images/graph_details.png)
