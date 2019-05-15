@@ -143,7 +143,7 @@ Also, to disable `forking` in `DataLoader`, set `n_worker = 0` in `config.ini`, 
 After the above steps, we should be good to go, however, an error `"failed to launch debugger for child process"` will still occur which is caused by `train_test_split` from `sklearn.model_selection` because it uses `multiprocessing` as well. But that seems to not cause any issue, we can still train the model and the train/valid dataset is splitted as well.
 
 ## Debugging with PyTorch
-We use TensorBoard to track our training metrics and visualize graphs, and we need `tensorboardX` for PyTorch to work with TensorBoard.
+We use TensorBoard to track our training metrics and visualize graphs, and we need [tensorboardX](https://github.com/lanpa/tensorboardX) for PyTorch to work with TensorBoard.
 ```
 pip install tensorflow tensorboard tensorboardX
 ```
@@ -175,6 +175,7 @@ You can checkout your graph in TensorBoard, which will look like this:
 You can click on blocks or nodes to expend them and learn more details
 ![](images/graph_details.png)
 
+#### Export as ONNX model
 To export the model as an ONNX (Open Neural Network Exchange format) model, install the prerequisites and include the lines below in your code.
 ```
 sudo apt-get install libprotobuf-dev protobuf-compiler
@@ -185,3 +186,19 @@ torch.onnx.export(model, (dummy_input,), "checkpoint/model.pb", verbose=False)
 writer.add_onnx_graph("checkpoint/model.pb")
 ```
 This will export your model to a .pb file and log the model graph to TensorBoard.
+
+### Logging scalars
+You can add scalars you want to inspect to TensorBoard by something like:
+```python
+writer.add_scalar('training/epoch_loss', loss, epoch)
+```
+![](images/tensorboard_scalars.png)
+
+### Logging images
+You can add images such as the inputs and outputs to TensorBoard to see their changes through epochs.
+```python
+writer.add_images('validating/inputs', inputs, epoch)
+writer.add_images('validating/outputs', outputs.repeat(1,3,1,1), epoch)
+```
+Note that `add_images` requires **RGB** images, so if your images are grayscale or 1-channel, you may use `repeat(1, 3, 1, 1)` to stack the image 3 times to make it 3-channel. (in this case the RGB channel is at "column 1" starting from "column 0")
+![](images/tensorboard_images.png)
