@@ -174,3 +174,14 @@ You can checkout your graph in TensorBoard, which will look like this:
 
 You can click on blocks or nodes to expend them and learn more details
 ![](images/graph_details.png)
+
+To export the model as an ONNX (Open Neural Network Exchange format) model, install the prerequisites and include the lines below in your code.
+```
+sudo apt-get install libprotobuf-dev protobuf-compiler
+pip install onnx
+```
+```python
+torch.onnx.export(model, (dummy_input,), "checkpoint/model.pb", verbose=False)
+writer.add_onnx_graph("checkpoint/model.pb")
+```
+This will export your model to a .pb file and log the model graph to TensorBoard.
