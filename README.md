@@ -163,6 +163,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 dummy_input = torch.rand(n_batch, 3, width, width, device=device)
 writer.add_graph(model, dummy_input)
 ```
+Note that you may see an error
+```
+RuntimeError: ONNX symbolic expected a constant value in the trace
+```
+occur if you use upsampling layers like `nn.ConvTranspose2d` in your network. According to [#10942](https://github.com/pytorch/pytorch/issues/10942), this is because ONNX statically determines the kernel size. One way to resolve this is to manually set the input and output sizes of these layers to constants.
+
 You can checkout your graph in TensorBoard, which will look like this:
 ![](images/UNet.png)
 
