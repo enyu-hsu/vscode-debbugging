@@ -147,7 +147,7 @@ We use TensorBoard to track our training metrics and visualize graphs, and we ne
 ```
 pip install tensorflow tensorboard tensorboardX
 ```
-Start your Python script and use TensorBaord with `tensorboard --logdir <logging_directory>`. A url address to TensorBoard will show up in the console, and you may use `ssh tunnel` and `port forwarding` for remote access.
+Start your Python script and use TensorBaord with `tensorboard --logdir <logging_directory>`. A url address to TensorBoard will show up in the console, and you may use `ssh tunnel` and `port forwarding` for remote access. The default `port` for TensorBoard is `:6006` by the way.
 
 Start logging things to tensorboard by:
 ```python
@@ -167,7 +167,7 @@ Note that you may see an error
 ```
 RuntimeError: ONNX symbolic expected a constant value in the trace
 ```
-occur if you use upsampling layers like `nn.ConvTranspose2d` in your network. According to [#10942](https://github.com/pytorch/pytorch/issues/10942), this is because ONNX statically determines the kernel size. One way to resolve this is to manually set the input and output sizes of these layers to constants.
+occur if you use **upsampling** layers like `nn.ConvTranspose2d` in your network. According to [#10942](https://github.com/pytorch/pytorch/issues/10942), this is because ONNX statically determines the kernel size. One way to resolve this is to manually set the input and output sizes of these layers to constants.
 
 You can checkout your graph in TensorBoard, which will look like this:
 ![](images/UNet.png)
