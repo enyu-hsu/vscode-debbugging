@@ -157,7 +157,7 @@ with SummaryWriter(log_dir) as writer:
 ```
 
 ### Visualizing graphs
-We could visualize our model graph to check if there's any miswiring by adding the following lines:
+We could visualize our model graph to check if there's any miswiring, or have a better view of the model's forward path. This could be done by adding the following lines:
 ```python
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 dummy_input = torch.rand(n_batch, 3, width, width, device=device)
@@ -200,5 +200,24 @@ You can add images such as the inputs and outputs to TensorBoard to see their ch
 writer.add_images('validating/inputs', inputs, epoch)
 writer.add_images('validating/outputs', outputs.repeat(1,3,1,1), epoch)
 ```
-Note that `add_images` requires **RGB** images, so if your images are grayscale or 1-channel, you may use `repeat(1, 3, 1, 1)` to stack the image 3 times to make it 3-channel. (in this case the RGB channel is at "column 1" starting from "column 0")
+Note that `add_images` requires **RGB** images, so if your images are grayscale or 1-channel, you may use `repeat(1, 3, 1, 1)` to stack the image 3 times to make it 3-channel. (in this case the RGB channel is at "column 1" starting from "column 0") You can toggle the orange bar to see images at differnet epochs, make sure you log the same batch of images to TensorBoard if you want to track their changes through epochs.
 ![](images/tensorboard_images.png)
+
+### Tracking PyTorch tensors and backpropagation
+For instance, if you want to check whether the first convolutional layer of your network is properly propagated or the gradient vanished, or maybe you want to check the backpropagation path of the network to see if anything went wrong, then you may use VS Code debugger's **watch list** to add variables or objects you would like to trace.
+
+#### Examples
+1. Checking the weights of a layer after the model's parameters are updated
+    Here we want to see how the weights of the first convolutional layer of our network, which is `model.c1.block.conv.weight`, change after an update, we simply add it to our watch list, and add breakpoints before and after the update.
+    ![](images/update_breakpoints.png)
+    
+    Execute the code in debug mode and add `model.c1.block.conv.weight` to the watch list, and we can see all of its attributes. Now we're at the breakpoint before the update, and let's check if the weights are correctly updated after `optimizer.step()`.
+    ![](images/weights.png)
+    
+    After the update, we can see that the `data` part is highlighted which indicates that it has been changed since the last breakpoint.
+    ![](images/weights_updated.png)
+    
+    Let's do some simple math to verify the correctness of the update! The optimizer we use in this case is `SGD` for simplicity and the `learning rate` is set to `10` so we can see significant changes in the weights.
+       ![](images/optimizer.png)
+    
+2. 
