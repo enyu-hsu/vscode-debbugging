@@ -198,9 +198,9 @@ writer.add_scalar('training/epoch_loss', loss, epoch)
 You can add images such as the inputs and outputs, model parameters, or outputs of the hidden layers to TensorBoard to see their changes through epochs. For example:
 ```python
 writer.add_images('validating/inputs', inputs, epoch)
-writer.add_images('validating/outputs', outputs.repeat(1,3,1,1), epoch)
-writer.add_images('weights/c2_block1_weights', model.c2.block1.conv.weight[:, :1, :, :].repeat(1,3,1,1), epoch)
-writer.add_images('hidden/u7_output', model.u7_out[:, :1, :, :].repeat(1,3,1,1), epoch)
+writer.add_images('validating/outputs', outputs.repeat(1, 3, 1, 1), epoch)
+writer.add_images('weights/c2_block1_weights', model.c2.block1.conv.weight[:, :1, :, :].repeat(1, 3, 1, 1), epoch)
+writer.add_images('hidden/u7_output', model.u7_out[:, :1, :, :].repeat(1, 3, 1, 1), epoch)
 ```
 Note that `add_images` requires **RGB** images, so if your images are grayscale or 1-channel, you may use `repeat(1, 3, 1, 1)` to stack the image 3 times to make it 3-channel. (in this case the RGB channel is at "column 1" starting from "column 0") You can toggle the orange bar to see images at differnet epochs, make sure you log the same batch of images to TensorBoard if you want to track their changes through epochs.
 ![](images/tensorboard_images.png)
