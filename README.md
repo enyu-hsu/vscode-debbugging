@@ -208,6 +208,7 @@ For instance, if you want to check whether the first convolutional layer of your
 
 #### Examples
 1. Checking the weights of a layer after the model's parameters are updated
+
     Here we want to see how the weights of the first convolutional layer of our network, which is `model.c1.block.conv.weight`, change after an update, we simply add it to our watch list, and add breakpoints before and after the update.
     ![](images/update_breakpoints.png)
     
@@ -218,6 +219,11 @@ For instance, if you want to check whether the first convolutional layer of your
     ![](images/weights_updated.png)
     
     Let's do some simple math to verify the correctness of the update! The optimizer we use in this case is `SGD` for simplicity and the `learning rate` is set to `10` so we can see significant changes in the weights.
-       ![](images/optimizer.png)
+    ![](images/optimizer.png)
     
+    We can verify by the calculating: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal&space;W_{new}&space;=&space;W_{old}-{lr}*grad" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal&space;W_{new}&space;=&space;W_{old}-{lr}*grad" title="\mathcal W_{new} = W_{old}-{lr}*grad" /></a>
+    ```
+    [9.1438-e02, 8.1476e-03, 9.2136e-02] = [0.094, 0.0067, 0.0913] - 10 * [2.5882e-04, -1.4976e-04, -7.9039-e05]
+    ```
+    Which is basically correct!
 2. 
