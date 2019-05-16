@@ -172,7 +172,7 @@ occur if you use **upsampling** layers like `nn.ConvTranspose2d` in your network
 You can checkout your graph in TensorBoard, which will look like this:
 ![](images/UNet.png)
 
-You can click on blocks or nodes to expend them and learn more details
+You can click on blocks or nodes to expand them and learn more details
 ![](images/graph_details.png)
 
 #### Export as ONNX model
