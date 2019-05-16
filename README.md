@@ -231,7 +231,7 @@ For instance, if you want to check whether the first convolutional layer of your
     
     We can verify by calculating: <a href="https://www.codecogs.com/eqnedit.php?latex=w_{new}=w_{old}-{lr}*grad" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w_{new}=w_{old}-{lr}*grad" title="w_{new}=w_{old}-{lr}*grad" /></a>
     ```python
-    [9.1438-e02, 8.1476e-03, 9.2136e-02] = [0.094, 0.0067, 0.0913] - 10 * [2.5882e-04, -1.4976e-04, -7.9039-e05]
+    [9.1438e-02, 8.1476e-03, 9.2136e-02] = [0.094, 0.0067, 0.0913] - 10 * [2.5882e-04, -1.4976e-04, -7.9039e-05]
     ```
     Which is basically correct!
 2. Tracking the backpropagation route
