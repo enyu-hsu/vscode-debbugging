@@ -209,14 +209,14 @@ For instance, if you want to check whether the first convolutional layer of your
 #### Examples
 1. Checking the weights of a layer after the model's parameters are updated
 
-    Here we want to see how the weights of the first convolutional layer of our network, which is `model.c1.block.conv.weight`, change after an update, we simply add it to our watch list, and add breakpoints before and after the update.
+    Here we want to see how the weights of the first convolutional layer of our network, which is `model.c1.block.conv.weight`, change after an update. We simply add it to our watch list, and add breakpoints before and after the update.
     
     ![](images/update_breakpoints.png)
     
-    Execute the code in debug mode and add `model.c1.block.conv.weight` to the watch list, and we can see all of its attributes. Now we're at the breakpoint before the update, and let's check if the weights are correctly updated after `optimizer.step()`.
+    Execute the code in debug mode and add `model.c1.block.conv.weight` to the watch list, and we can see all of its attributes. Now we're at the breakpoint before the update, let's check if the weights are correctly updated after `optimizer.step()`.
     ![](images/weights.png)
     
-    After the update, we can see that the `data` part is highlighted which indicates that it has been changed since the last breakpoint.
+    After the update, the `data` part is highlighted which indicates that it has been changed since the last breakpoint.
     ![](images/weights_updated.png)
     
     Let's do some simple math to verify the correctness of the update! The optimizer we use in this case is `SGD` for simplicity and the `learning rate` is set to `10` so we can see significant changes in the weights.
@@ -227,4 +227,9 @@ For instance, if you want to check whether the first convolutional layer of your
     [9.1438-e02, 8.1476e-03, 9.2136e-02] = [0.094, 0.0067, 0.0913] - 10 * [2.5882e-04, -1.4976e-04, -7.9039-e05]
     ```
     Which is basically correct!
-2. 
+2. Tracking the backpropagation route
+    
+    If you're interested in the backpropagation route of `loss`, you can add it to the **watch list** and trace the whole path through `loss.grad_fn.next_functions` and `loss.grad_fn.next_functions[0][0].next_functions` and so on..., which may look like something like this:
+    ![](images/loss.png)
+    
+    As we know that `Sigmoid` is the last layer of our model, the calculations that come before `Sigmoid` are the process of computing the loss, you may keep go on and trace the model backwards if you wanted to.
