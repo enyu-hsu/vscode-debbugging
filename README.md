@@ -175,7 +175,7 @@ You can checkout your graph in TensorBoard, which will look like this:
 You can click on blocks or nodes to expand them and learn more details
 ![](images/graph_details.png)
 
-#### Export as ONNX model
+#### Export as ONNX models
 To export the model as an ONNX (Open Neural Network Exchange format) model, install the prerequisites and include the lines below in your code.
 ```
 sudo apt-get install libprotobuf-dev protobuf-compiler
@@ -203,6 +203,7 @@ writer.add_images('weights/c2_block1_weights', model.c2.block1.conv.weight[:, :1
 writer.add_images('hidden/u7_output', model.u7_out[:, :1, :, :].repeat(1, 3, 1, 1), epoch)
 ```
 Note that `add_images` requires **RGB** images, so if your images are grayscale or 1-channel, you may use `repeat(1, 3, 1, 1)` to stack the image 3 times to make it 3-channel. (in this case the RGB channel is at "column 1" starting from "column 0") You can toggle the orange bar to see images at differnet epochs, make sure you log the same batch of images to TensorBoard if you want to track their changes through epochs.
+
 ![](images/tensorboard_images.png)
 
 ![](images/tensorboard_images_weights.png)
@@ -229,7 +230,7 @@ For instance, if you want to check whether the first convolutional layer of your
     ![](images/optimizer.png)
     
     We can verify by calculating: <a href="https://www.codecogs.com/eqnedit.php?latex=w_{new}=w_{old}-{lr}*grad" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w_{new}=w_{old}-{lr}*grad" title="w_{new}=w_{old}-{lr}*grad" /></a>
-    ```
+    ```python
     [9.1438-e02, 8.1476e-03, 9.2136e-02] = [0.094, 0.0067, 0.0913] - 10 * [2.5882e-04, -1.4976e-04, -7.9039-e05]
     ```
     Which is basically correct!
