@@ -210,6 +210,7 @@ For instance, if you want to check whether the first convolutional layer of your
 1. Checking the weights of a layer after the model's parameters are updated
 
     Here we want to see how the weights of the first convolutional layer of our network, which is `model.c1.block.conv.weight`, change after an update, we simply add it to our watch list, and add breakpoints before and after the update.
+    
     ![](images/update_breakpoints.png)
     
     Execute the code in debug mode and add `model.c1.block.conv.weight` to the watch list, and we can see all of its attributes. Now we're at the breakpoint before the update, and let's check if the weights are correctly updated after `optimizer.step()`.
