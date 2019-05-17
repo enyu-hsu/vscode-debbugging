@@ -1,4 +1,4 @@
-## Debugging with PyTorch
+# Debugging with PyTorch
 We use TensorBoard to track our training metrics and visualize graphs, and we need [tensorboardX](https://github.com/lanpa/tensorboardX) for PyTorch to work with TensorBoard.
 ```
 pip install tensorflow tensorboard tensorboardX
@@ -12,7 +12,7 @@ with SummaryWriter(log_dir) as writer:
     # your code here
 ```
 
-### Visualizing graphs
+## Visualizing graphs
 We could visualize our model graph to check if there's any miswiring, or have a better view of the model's forward path. This could be done by adding the following lines:
 ```python
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -31,7 +31,7 @@ You can checkout your graph in TensorBoard, which will look like this:
 You can click on blocks or nodes to expand them and learn more details
 ![](images/graph_details.png)
 
-#### Export as ONNX models
+### Export as ONNX models
 To export the model as an ONNX (Open Neural Network Exchange format) model, install the prerequisites and include the lines below in your code.
 ```
 sudo apt-get install libprotobuf-dev protobuf-compiler
@@ -43,14 +43,14 @@ writer.add_onnx_graph("checkpoint/model.pb")
 ```
 This will export your model to a .pb file and log the model graph to TensorBoard.
 
-### Logging scalars
+## Logging scalars
 You can add scalars you want to inspect to TensorBoard by something like:
 ```python
 writer.add_scalar('training/epoch_loss', loss, epoch)
 ```
 ![](images/tensorboard_scalars.png)
 
-### Logging images
+## Logging images
 You can add images such as the inputs and outputs, model parameters, or outputs of the hidden layers to TensorBoard to see their changes through epochs. For example:
 ```python
 writer.add_images('validating/inputs', inputs, epoch)
@@ -66,10 +66,10 @@ Note that `add_images` requires **RGB** images, so if your images are grayscale 
 
 ![](images/tensorboard_images_hidden_outputs.png)
 
-### Tracking PyTorch tensors and backpropagation
+## Tracking PyTorch tensors and backpropagation
 For instance, if you want to check whether the first convolutional layer of your network is properly propagated or the gradient vanished, or maybe you want to check the backpropagation path of the network to see if anything went wrong, then you may use VS Code debugger's **watch list** to add variables or objects you would like to trace.
 
-#### Examples
+### Examples
 1. Checking the weights of a layer after the model's parameters are updated
 
     Here we want to see how the weights of the first convolutional layer of our network, which is `model.c1.block.conv.weight`, change after an update. We simply add it to our watch list, and add breakpoints before and after the update.
