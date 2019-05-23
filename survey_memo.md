@@ -15,4 +15,7 @@
     1. Adversarial attack and defense
     
         This is an interesting one since we usually won't expect (perhaps?) such attakcs from our client.
+        
+        [A quick view on adversarial attacks](http://karpathy.github.io/2015/03/30/breaking-convnets/).
+        
         [ClerverHans: An adversarial benchmark](https://github.com/tensorflow/cleverhans)
