@@ -12,15 +12,15 @@
     I found those visualizations are often analyzed **case by case** (model by model), since the results are strongly affected by the data the model trained on. I did not find a general process on explinaing these visualized results.
        
 2. Verifying the **robustness** of a model (evaluating whether the model is well-trained)
-    1. Adversarial attacks and defenses
+    1. Measuring filter importance 
+        1. [Filter importance by L1 norm](https://openreview.net/pdf?id=rJqFGTslg) => naive but efficient
+        2. [Filter importance by Tyler expansion](https://arxiv.org/pdf/1611.06440.pdf) => costly but beats navie ones
+        3. [Classification accuracy reduciton (CAR)](https://arxiv.org/pdf/1705.07356.pdf) => computationally heavy
+    2. [Model resistence to corruptions and perturbations](https://arxiv.org/pdf/1903.12261.pdf) => common corruptions and perturbation like Gaussian noise and Gaussian blur
+    3. Adversarial attacks and defenses
     
         This is an interesting one since we usually won't expect (perhaps?) such attakcs from our client.
         
         [A quick view on adversarial attacks](http://karpathy.github.io/2015/03/30/breaking-convnets/).
         
         [ClerverHans: An adversarial benchmark](https://github.com/tensorflow/cleverhans)
-    2. Measuring filter importance 
-        1. [Filter importance by L1 norm](https://openreview.net/pdf?id=rJqFGTslg) => naive but efficient
-        2. [Filter importance by Tyler expansion](https://arxiv.org/pdf/1611.06440.pdf) => costly but beats navie ones
-        3. [Classification accuracy reduciton (CAR)](https://arxiv.org/pdf/1705.07356.pdf) => computationally heavy
-    3. [Model resistence to corruptions and perturbations](https://arxiv.org/pdf/1903.12261.pdf) => common corruptions and perturbation like Gaussian noise and Gaussian blur
