@@ -19,5 +19,7 @@
         [A quick view on adversarial attacks](http://karpathy.github.io/2015/03/30/breaking-convnets/).
         
         [ClerverHans: An adversarial benchmark](https://github.com/tensorflow/cleverhans)
-    2. Other methods
-        
+    2. Measuring filter importance 
+        1. [Filter importance by L1 norm](https://openreview.net/pdf?id=rJqFGTslg) => naive but efficient
+        2. [Filter importance by Tyler expansion](https://arxiv.org/pdf/1611.06440.pdf) => costly but beats navie ones
+        3. [Classification accuracy reduciton (CAR)](https://arxiv.org/pdf/1705.07356.pdf) => computationally heavy
