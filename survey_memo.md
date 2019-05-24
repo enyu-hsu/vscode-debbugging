@@ -24,3 +24,6 @@
         [A quick view on adversarial attacks](http://karpathy.github.io/2015/03/30/breaking-convnets/).
         
         [ClerverHans: An adversarial benchmark](https://github.com/tensorflow/cleverhans)
+
+    4. Something I came up with...
+        Maybe we could try to plot the distirbution of the filter activations on a whole dataset, and try to find out redundant filters. (The distribution could be the sum of standardized mean of the outputs of that layer)
