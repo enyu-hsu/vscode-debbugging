@@ -1,4 +1,4 @@
-## Feasability Survey
+## Feasible Model Evaluation Methods
 1. Understanding what the model has learned by **visualization** approaches
 
     [Github codes](https://github.com/utkuozbulak/pytorch-cnn-visualizations) with several common CNN visualization techniques implemented. Below are the ones that I think may work in semantic segmentation tasks.
