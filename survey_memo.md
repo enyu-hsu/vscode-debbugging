@@ -11,7 +11,7 @@
         
     I found those visualizations are often analyzed **case by case** (model by model), since the results are strongly affected by the data the model trained on. I did not find a general process on explinaing these visualized results.
        
-2. Verifying the **robustness** of a model
+2. Verifying the **robustness** of a model (evaluating whether the model is well-trained)
     1. Adversarial attack and defense
     
         This is an interesting one since we usually won't expect (perhaps?) such attakcs from our client.
@@ -19,3 +19,5 @@
         [A quick view on adversarial attacks](http://karpathy.github.io/2015/03/30/breaking-convnets/).
         
         [ClerverHans: An adversarial benchmark](https://github.com/tensorflow/cleverhans)
+    2. Other methods
+        
