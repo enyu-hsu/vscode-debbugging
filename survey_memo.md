@@ -12,7 +12,7 @@
     I found those visualizations are often analyzed **case by case** (model by model), since the results are strongly affected by the data the model trained on. I did not find a general process on explinaing these visualized results.
        
 2. Verifying the **robustness** of a model (evaluating whether the model is well-trained)
-    1. Adversarial attack and defense
+    1. Adversarial attacks and defenses
     
         This is an interesting one since we usually won't expect (perhaps?) such attakcs from our client.
         
