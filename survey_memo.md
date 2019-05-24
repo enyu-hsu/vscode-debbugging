@@ -27,4 +27,4 @@
 
     4. Something I came up with...
     
-        Maybe we could try to plot the distirbution of filter activations on a whole dataset, and try to find out redundant filters. (The distribution could be the sum of normalized mean of the outputs of that layer)
+        Maybe we could try to plot the distirbution of filter activations on a whole dataset, and try to find out redundant filters. (The distribution could be the sum of normalized/standardized mean of the outputs of that layer)
